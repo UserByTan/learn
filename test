@@ -1,0 +1,34 @@
+import numpy as np
+
+a = np.array([2,3,4,5])
+b = np.array([8,5,4])
+c = np.array([5,4,6,8,3])
+ax,bx,cx = np.ix_(a,b,c)
+#print(ax)
+#print(bx)
+#print(cx)
+#print(ax.shape,bx.shape,cx.shape)
+
+#result = ax+bx*cx
+#print(result)
+
+#print('The result is ',a[3]+b[2]*c[4])
+def ufunc_reduce(ufct, *vectors):
+    vs = np.ix_(*vectors)
+    r = ufct.identity
+    for v in vs:
+        r = ufct(r,v)
+    return r
+#print('the result is',ufunc_reduce(np.add,a,b,c))
+z=np.array([[1.0,2.0],[3.0,4.0]])
+#print(z)
+#print(z.transpose())
+#print(np.linalg.inv(z))
+y=np.eye(3)
+#print(y)
+j=np.array([[0.0,-1.0],[1.0,0.0]])
+#print(j@j)
+#print(np.trace(y))
+m=np.array([[5.0],[7.0]])
+print(np.linalg.solve(z,m))
+print(np.linalg.eig(j))
