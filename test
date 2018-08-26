@@ -19,21 +19,26 @@ def ufunc_reduce(ufct, *vectors):
     for v in vs:
         r = ufct(r,v)
     return r
-#print('the result is',ufunc_reduce(np.add,a,b,c))
+print('the result is',ufunc_reduce(np.add,a,b,c))
+
 z=np.array([[1.0,2.0],[3.0,4.0]])
-#print(z)
-#print(z.transpose())
-#print(np.linalg.inv(z))
+print(z)
+print(z.transpose())
+print(np.linalg.inv(z))
+
 y=np.eye(3)
-#print(y)
+print(y)
+
 j=np.array([[0.0,-1.0],[1.0,0.0]])
-#print(j@j)
-#print(np.trace(y))
+print(j@j)
+print(np.trace(y))
+
 m=np.array([[5.0],[7.0]])
 print(np.linalg.solve(z,m))
 print(np.linalg.eig(j))
 
 直方图
+1：
 import numpy as np
 import matplotlib.pyplot as plt
 # Build a vector of 10000 normal deviates with variance 0.5^2 and mean 2
@@ -47,4 +52,76 @@ plt.show()
 (n, bins) = np.histogram(v, bins=50, density=True)  # NumPy version (no plot)
 
 plt.plot(5*(bins[1:]+bins[:-1]), n)
+plt.show()
+
+
+2：
+import matplotlib
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(19680801)
+
+# example data
+mu = 100  # mean of distribution
+sigma = 15  # standard deviation of distribution
+x = mu + sigma * np.random.randn(437)
+
+num_bins = 50
+
+fig, ax = plt.subplots()
+
+# the histogram of the data
+n, bins, patches = ax.hist(x, num_bins, density=1)
+
+# add a 'best fit' line
+y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *
+     np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
+ax.plot(bins, y, '--')
+ax.set_xlabel('Smarts')
+ax.set_ylabel('Probability density')
+ax.set_title(r'Histogram of IQ: $\mu=100$, $\sigma=15$')
+
+# Tweak spacing to prevent clipping of ylabel
+fig.tight_layout()
+plt.show()
+曲线图
+import matplotlib
+import matplotlib.pyplot as  plt
+import numpy as np
+
+t = np.arange(0.0,2.0,0.01)
+s = 1 + np.sin(2 * np.pi * t)
+
+fig, ax = plt.subplots()
+ax.plot(t, s)
+
+ax.set(xlabel = 'Time(s)',ylabel = 'Voltage(mv)',title = 'About as simple as it gets,folks')
+ax.grid()  #显示网格
+
+fig.savefig("test1.png")
+plt.show()
+
+两个图
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+x1 = np.linspace(0.0, 5.0)
+x2 = np.linspace(0.0, 3.0)
+
+y1 = np.cos(2 * np.pi *x1) * np.exp(-x1)
+y2 = np.cos(2 * np.pi *x2)
+
+plt.subplot(2,1,1)
+plt.plot(x1, y1, 'o-')
+plt.grid()
+plt.title('A tale of 2 subplots')
+plt.ylabel('Damped oscillation')
+
+plt.subplot(2,1,2)
+plt.plot(x2, y2, '.-')
+plt.grid()
+plt.xlabel('time(s)')
+plt.ylabel('Undamped')
+
 plt.show()
